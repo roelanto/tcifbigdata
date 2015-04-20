@@ -1,4 +1,4 @@
-package nl.hu.bigdata.wordcount;
+package nl.hu.hadoop.wordcount;
 
 import java.io.IOException;
 import org.apache.hadoop.fs.Path;
