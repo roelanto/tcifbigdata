@@ -1,0 +1,8 @@
+yahoo.com	news sports finance email celebrity
+amazon.com	shoes books jeans
+google.com	news finance email search
+microsoft.com	operating-system productivity search
+target.com	shoes books jeans groceries
+wallmart.com	books groceries shoes jeans
+facebook.com	news social sports
+linkedin.com	news recruitment
