@@ -20,5 +20,6 @@ red	3
 three	1
 two	1
 yellow	1
-RoelantardesMBP:hadoop-2.7.2 roelant$ ```
+RoelantardesMBP:hadoop-2.7.2 roelant$ 
+```
 
