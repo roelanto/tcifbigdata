@@ -12,7 +12,7 @@ RoelantardesMBP:wordcount roelant$ mvn package
 RoelantardesMBP:wordcount roelant$ cd ../../..
 RoelantardesMBP:hadoop roelant$ cd hadoop-2.7.2/
 RoelantardesMBP:hadoop-2.7.2 roelant$ echo "one two three red red red blue yellow" > input/input.txt
-RoelantardesMBP:hadoop-2.7.2 roelant$ bin/hadoop jar ../tcifbigdata/code/wordcount/target/wordcount-0.0.1-SNAPSHOT.jar nl/hu/hadoop/word
+RoelantardesMBP:hadoop-2.7.2 roelant$ bin/hadoop jar ../tcifbigdata/code/wordcount/target/wordcount-0.0.1-SNAPSHOT.jar nl/hu/hadoop/wordcount/WordCount input output
 RoelantardesMBP:hadoop-2.7.2 roelant$ cat output/part-r-00000 
 blue	1
 one	1
