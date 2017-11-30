@@ -1,9 +1,11 @@
 # tcifbigdata
-TCIF Big Data dag 3
+TCIF Big Data stand-alone applicatie
 
 De code in deze respository is gebaseerd op de Hadoop cursus van Surf/Sara.
 
-Voorbeeld van een run:
+Je kunt de code rechtstreeeks draaien in bijvoorbeeld IntelliJ; of met Maven een JAR maken die met behulp van Hadoop gedraaid kan worden.
+
+Voorbeeld van een run door eerst een JAR te maken en dan Hadoop aan te roepen:
 ```
 RoelantardesMBP:hadoop roelant$ ls
 hadoop-2.7.2  tcifbigdata
