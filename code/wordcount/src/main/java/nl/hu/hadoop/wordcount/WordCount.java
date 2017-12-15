@@ -12,6 +12,9 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class WordCount {
 
@@ -31,37 +34,43 @@ public class WordCount {
 		/*
 		 * uncomment the following code to append a random number (0-9999) to the output dir each time.
 		 */
-		// pathname = ""+args[1]+"."+ new Random().nextInt(9999);
-		// System.err.println("Output was sent to directory "+pathname);
+		 pathname = ""+args[1]+"."+ new Random().nextInt(9999);
+		 System.err.println("Output was sent to directory "+pathname);
 
 		FileOutputFormat.setOutputPath(job, new Path(pathname));
 
-		job.setMapperClass(WordCountMapper.class);
-		job.setReducerClass(WordCountReducer.class);
+		job.setMapperClass(InvertedIndexMapper.class);
+		job.setReducerClass(InvertedIndexReducer.class);
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
+		job.setOutputValueClass(Text.class);
 
 		job.waitForCompletion(true);
 	}
 }
 
-class WordCountMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, Text> {
 
-	public void map(LongWritable Key, Text value, Context context) throws IOException, InterruptedException {
+	public void map(LongWritable Key,
+					Text value,
+					Context context) throws IOException, InterruptedException {
 		String[] tokens = value.toString().split("\\s");
-		for (String s : tokens) {
-			context.write(new Text(s), new IntWritable(1));
+		String key = tokens[0];
+		List<String> values = new ArrayList<>();
+		for (int i=1; i<tokens.length; i++) {
+			context.write(new Text(key), new Text(tokens[i]));
 		}
 	}
 }
 
-class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
-	public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
-		int sum = 0;
-		for (IntWritable i : values) {
-			sum += i.get();
+class InvertedIndexReducer extends Reducer<Text, Text, Text, Text> {
+	public void reduce(Text key,
+					   Iterable<Text> values,
+					   Context context) throws IOException, InterruptedException {
+		StringBuffer sb = new StringBuffer();
+		for (Text v : values) {
+			sb.append(v).append(" ");
 		}
-		context.write(key, new IntWritable(sum));
+		context.write(key, new Text(sb.toString()));
 	}
 }
