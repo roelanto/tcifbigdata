@@ -58,7 +58,7 @@ class InvertedIndexMapper extends Mapper<LongWritable, Text, Text, Text> {
 		String key = tokens[0];
 		List<String> values = new ArrayList<>();
 		for (int i=1; i<tokens.length; i++) {
-			context.write(new Text(key), new Text(tokens[i]));
+			context.write(new Text(tokens[i]), new Text(key));
 		}
 	}
 }
